@@ -17,7 +17,7 @@ use solid principles and a good folder structure and readable code
 1. **Environment Setup**:
    - Use **dotenv** for configuration and environment variables.
    - Integrate **MongoDB Atlas** for database management.
-
+ like use config file to export all env variables and consttnts etc
 2. **Authentication**:
    - Implement **JWT (JSON Web Token)** for user authentication.
    - Include basic JWT authentication with access tokens (no refresh tokens).
@@ -104,5 +104,4 @@ use solid principles and a good folder structure and readable code
 ### Optional Features:
 - Implement **coupon/discount functionality** on orders.
 - Enable **user reviews** for products and shops.
-
 
