@@ -58,8 +58,9 @@ Code should readable and good
    - Implement **push notifications** for order updates and password reset.
    - Include **notification settings** (opt-in or out for email/push notifications).
 
-10. **Admin and Vendor-specific Features**:
+10. ** Vendor-specific Features**:
     - **Analytics and Data Export**: Provide routes for exporting user and order data (e.g., CSV export of order history).
+    - ** Import and Export Data in specific ( fixed format ) like load data to backend or export data from backend from csv etc
     - Vendors should be able to manage stock by adding/editing/removing products in their shops, which reflects across both customer and vendor views.
     - Ensure **product stock levels** are correctly updated when customers place orders.
 
