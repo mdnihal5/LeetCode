@@ -1,128 +1,106 @@
-**Project Overview:**
-Build a **quick commerce mobile app** for construction material shopping using **React Native** and **Expo**. The backend API, routes, controllers, and models will be utilized to implement a fully functional, user-friendly UI for browsing, ordering, and managing construction materials. Focus on a modern and sleek design inspired by Stripe and Zomato.
+first read and anaylize thsi prompt and list down all requirements 
+implement one by one 
+check for duplicated and use them i don't need duplicates 
+after last make sure you implemnted all the listed down requriements if not implement and do this interative until tis' complete
+Create a complete backend application for **Dumpit**, a civil construction quick commerce app, using **Express.js** and **Node.js**. The backend should handle all necessary functionalities for vendors and customers, ensuring a smooth and optimized flow. Here are the key features and requirements for the project:
 
-**Technology Stack:**
-- **Frontend:** React Native, Expo (JavaScript)
-- **State Management:** Redux (for persistence)
-- **UI Design:** Modern, responsive, and clean. Colors and style inspired by Stripe and Zomato.
 
----
+then first thing what are requirment 
+list down and thing how to implement efficiently
+how can we rmeove redundancy
+is is consistant in all places are we missing anything
+how to implement it so that it will become consistant short 
+Code should readable and good 
 
-**Features to Implement:**
-1. **Authentication Flow:**
-- Implement login/signup/logout with email/password authentication.
-- Include easy navigation to the login, signup, and logout screens.
+### Core Requirements:
+1. **Environment Setup**:
+   - Use **dotenv** for configuration and environment variables.
+   - Integrate **MongoDB Atlas** for database management.
 
-2. **Home Screen:**
-- Display featured shops, products, and promotional banners.
-- Implement easy navigation to product categories, shops, and other sections.
+2. **Authentication**:
+   - Implement **JWT (JSON Web Token)** for user authentication.
+   - Include basic JWT authentication with access tokens (no refresh tokens).
+   - Provide routes for **Login**, **Signup**, **Logout**, and **Forgot Password** functionality.
+   - Ensure proper middleware handling for authenticated routes.
+   
+3. **User Model**:
+   - Fields: `name`, `email`, `password`, `phone`, `role` (Vendor, Customer) and no admin , `avatar_url`, `location`.
+[products], [cart], [notifications], [addresses] etc and changes should be in sync 
+   - Allow users to **edit** their profile (except email).
+   - Ensure **strong password validation** and **hashing** before saving to the database.
+   - Add functionality for **role-based access control** (only admins and vendors should be able to perform certain actions).
 
-3. **Search, Filters, and Sorting:**
-- Robust search bar for filtering products by categories, product name, shop name, etc.
-- Sorting options: distance, price, ratings.
+4. **Address Model**:
+   - Fields: `name`, `village`, `street`, `district`, `state`, `pincode`, `phone`.
+   - Implement **add/edit/remove** address functionality.
 
-4. **Order Tracking:**
-- Real-time order tracking with map integration.
-- Option to cancel orders and view order details (price, delivery info).
+5. **Products Model**:
+   - Fields: `name`, `type`, `category`, `rate`, `units`, `discount`, `rating`.
+   - Implement CRUD functionality for products (add, edit, delete).
+   - Ensure **sync** between products and shops (when a product is added to the shop, it reflects correctly in both the vendor and customer view).
 
-5. **Order History:**
-- List of all past orders with details: price, delivery date, and status.
+6. **Shop Model**:
+   - Fields: `name`, `address`, `products[]`, `rating`.
+   - Implement functionality to **add**, **remove**, **edit** shops and manage products within them.
+   - Ensure **sync** between shop product details and the cart.
 
-6. **Cart Page:**
-- List all items in the cart.
-- Ability to adjust quantity, show total items and prices.
+7. **Cart Model**:
+   - Handle product additions and removals.
+   - Implement logic to **manage the count of products** in the cart and reflect changes.
 
-7. **Checkout Page:**
-- Implement payment options (credit card, wallet, etc.).
-- Address form and order summary before confirming purchase.
+8. **Order Model**:
+   - Fields: Order details including `product`, `quantity`, `total_price`, `status` (e.g., pending, completed, canceled), `created_at`, etc.
+   - Implement **order creation**, **order cancellation**, **order update** routes.
+   - Handle **checkout flow**, including integration with **Razorpay** for payment.
 
-8. **Add/Edit Address:**
-- Allow users to add new addresses or edit existing ones.
+9. **Notifications**:
+   - Integrate **Nodemailer** for email notifications (order status, password reset).
+   - Implement **push notifications** for order updates and password reset.
+   - Include **notification settings** (opt-in or out for email/push notifications).
 
-9. **Order Confirmation Page:**
-- Display order details, delivery info, and tracking options.
+10. **Admin and Vendor-specific Features**:
+    - **Analytics and Data Export**: Provide routes for exporting user and order data (e.g., CSV export of order history).
+    - Vendors should be able to manage stock by adding/editing/removing products in their shops, which reflects across both customer and vendor views.
+    - Ensure **product stock levels** are correctly updated when customers place orders.
 
-10. **Shops Page:**
-- List available shops with names, reviews, and basic info.
+11. **Search and Filter**:
+    - Implement search and filter functionality for **shops**, **products**, and **categories** using **query params** (e.g., search by name, filter by price, category).
+    - Ensure these fields are **required** for the filter and cannot be empty.
 
-11. **Product Page:**
-- Display product details (name, description, price, reviews, images).
+12. **Location Tracking**:
+    - Implement **location tracking** with integration to a maps API for location-based services.
+    - Add user-specific functionality (e.g., tracking delivery address for orders).
+13. use console logs with colors for ( method route ex: POST /auth/login ) etc and some good comments in controllers
 
-12. **Shop Page:**
-- Shop profile page with name, description, images, product list, and reviews.
+### Middleware:
+- Implement **CORS handling**.
+- Add necessary **validation middleware** for incoming requests (e.g., Joi ).
+- Ensure **authentication middleware** is properly applied to protected routes.
+- Apply **role-based authorization middleware** to ensure only authorized users (vendors/admins) can access certain resources.
 
-13. **Product Details Page:**
-- Detailed information about products (name, description, images, reviews, price, availability).
+### Folder Structure:
+- Organize the project using a **modular folder structure**, with separate folders for:
+  - **Controllers**: Handle the business logic.
+  - **Routes**: Define API routes for various resources.
+  - **Models**: Database schema definitions (User, Product, Order, etc.).
+  - **Middleware**: Custom middleware for validation, authentication, and authorization.
+  - **Services**: For business-specific logic (e.g., payment services, notification services).
+  - **Utils**: Helper functions (e.g., for email sending, hashing, etc.).
 
-14. **Notification Page:**
-- Show app notifications for order updates, promotions, and offers.
+### Code Quality:
+- Use **solid, clean, and modular code** practices.
+- Ensure **proper validation** on all models and input fields.
+- Remove any **duplicate code**.
+- Keep the code **short, efficient**, and **easy to understand**.
 
----
+### Other Considerations:
+- Ensure **proper error handling** and meaningful error messages.
+- **Optimized database queries** (use of indexing, pagination, etc.).
+- Integrate **Cloudinary** for storing and serving images (product images, user avatars).
+- Implement **security best practices** like **password hashing** and **rate limiting**.
 
-**UI/UX Requirements:**
-- Clean and modern design with a responsive layout.
-- Focus on mobile-friendly and intuitive navigation.
-- Color scheme and UI inspired by Stripe and Zomato.
+### Optional Features:
+- Implement **coupon/discount functionality** on orders.
+- Enable **user reviews** for products and shops.
 
----
 
-**Code Structure and Quality:**
-1. **Modular Code:**
-- Build reusable, well-organized components.
-- Ensure adherence to **SOLID principles** for maintainability and scalability.
-
-2. **State Management:**
-- Use **Redux** for persistence, ensuring data consistency across app sessions.
-
-3. **Error-Free Code:**
-- Avoid redundant code and unnecessary imports.
-- Ensure no errors during runtime (e.g., missing imports, broken links).
-
-4. **Follow Best Practices:**
-- Implement best practices for performance, scalability, and user experience.
-
----
-
-### **Step-by-Step Procedure to Ensure Success:**
-
-1. **Read the Backend Models and API Routes:**
-- Understand the backend structure by reviewing **models, routes, controllers**, and **index files**.
-- Ensure that each UI feature corresponds to a backend API.
-
-2. **Design UI Components:**
-- Create reusable UI components such as buttons, headers, cards, input fields, and modals.
-- Focus on **Stripe** and **Zomato**-inspired modern and minimalistic styles.
-
-3. **Setup State Management (Redux):**
-- Implement **Redux** for global state management.
-- Set up actions and reducers to handle authentication, cart, order history, and product details.
-
-4. **Build Navigation:**
-- Set up navigation using **React Navigation** for seamless transitions between screens.
-- Implement stack and tab navigation for various sections (Home, Cart, Orders, Profile, etc.).
-
-5. **Connect Backend APIs to UI:**
-- Fetch data from the backend API and display it on the appropriate screens.
-- Ensure each screen (Home, Product Details, Cart, Checkout, etc.) is functional with live data from APIs.
-
-6. **Order Management and Cart:**
-- Implement functionality for adding/removing items from the cart.
-- Track the user's order status and integrate real-time tracking.
-
-7. **Checkout and Payment:**
-- Implement a **payment gateway** (or a mock for demo purposes).
-- Allow users to select an address, add/edit details, and place orders.
-8.after completing project check if all features mentioned here are completed or not like screens,features etc
-9. **Refactor and Optimize Code:**
-- Ensure the code is modular, clean, and free from errors.
-- Test the app under different conditions to ensure smooth performance.
-
-10. **Final Review and Adjustments:**
-- Check if all the **15 key features** are implemented.
-- Ensure **UI consistency** and **responsive design** across all screens.
-- Validate that the **backend API integration** is complete and working as expected.
-
----
-
-**Outcome:**
-A fully functional, responsive, and modern eCommerce app for construction material shopping, with a clean, user-friendly design, integrated with the backend, and adhering to best coding practices.
