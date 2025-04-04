@@ -11,6 +11,7 @@ how can we rmeove redundancy
 is is consistant in all places are we missing anything
 how to implement it so that it will become consistant short 
 Code should readable and good 
+use solid principles and a good folder structure and readable code 
 
 ### Core Requirements:
 1. **Environment Setup**:
